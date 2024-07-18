@@ -83,6 +83,7 @@ jobs:
               }' \
               https://api.openai.com/v1/engines/davinci-codex/completions)
             
+            echo "Response gotten from $response" #check response gotten from codex
             fixed_code=$(echo "$response" | jq -r '.choices[0].text')
 
             # Ensure fixed_code is not empty
