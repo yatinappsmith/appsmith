@@ -52,47 +52,47 @@ jobs:
           done
           echo "::set-output name=generated_test_files::$GENERATED_TEST_FILES"
 
-      - name: Run Generated Jest Tests
-        id: run-jest-tests
+      # - name: Run Generated Jest Tests
+      #   id: run-jest-tests
+      #   if: steps.generate-tests.outputs.generated_test_files != ''
+      #   run: |
+      #     failed_tests=""
+      #     for testfile in ${{ steps.generate-tests.outputs.generated_test_files }}; do
+      #       if ! yarn jest "$testfile"; then
+      #         failed_tests="$failed_tests $testfile"
+      #       fi
+      #     done
+      #     echo "::set-output name=failed_tests::$failed_tests"
+      
+      - name: Fix Failed Tests using Codex
         if: steps.generate-tests.outputs.generated_test_files != ''
         run: |
-          failed_tests=""
+          fixed_tests=""
           for testfile in ${{ steps.generate-tests.outputs.generated_test_files }}; do
-            if ! yarn jest "$testfile"; then
-              failed_tests="$failed_tests $testfile"
-            fi
-          done
-          echo "::set-output name=failed_tests::$failed_tests"
-      
-      # - name: Fix Failed Tests using Codex
-        # if: steps.run-jest-tests.outputs.failed_tests != ''
-        # run: |
-        #   fixed_tests=""
-        #   for testfile in ${{ steps.run-jest-tests.outputs.failed_tests }}; do
-        #     # Construct Codex API request and handle response
-        #     response=$(curl -X POST \
-        #       -H "Authorization: Bearer $OPENAI_API_KEY" \
-        #       -H "Content-Type: application/json" \
-        #       -d '{
-        #         "model": "text-davinci-003",
-        #         "prompt": "Fix Jest test in '"$testfile"':",
-        #         "max_tokens": 150
-        #       }' \
-        #       https://api.openai.com/v1/engines/davinci-codex/completions)
+            # Construct Codex API request and handle response
+            response=$(curl -X POST \
+              -H "Authorization: Bearer $OPENAI_API_KEY" \
+              -H "Content-Type: application/json" \
+              -d '{
+                "model": "text-davinci-003",
+                "prompt": "Fix Jest test in '"$testfile"':",
+                "max_tokens": 150
+              }' \
+              https://api.openai.com/v1/engines/davinci-codex/completions)
             
-        #     fixed_code=$(echo "$response" | jq -r '.choices[0].text')
+            fixed_code=$(echo "$response" | jq -r '.choices[0].text')
 
-        #     # Ensure fixed_code is not empty
-        #     if [ -z "$fixed_code" ]; then
-        #       echo "Codex did not provide any fixed code for $testfile"
-        #       exit 1
-        #     fi
+            # Ensure fixed_code is not empty
+            if [ -z "$fixed_code" ]; then
+              echo "Codex did not provide any fixed code for $testfile"
+              exit 1
+            fi
 
-        #     # Update the test file with fixed_code
-        #     echo "$fixed_code" > "$testfile"
-        #     fixed_tests="$fixed_tests $testfile"
-        #   done
-        #   echo "::set-output name=fixed_tests::$fixed_tests"
+            # Update the test file with fixed_code
+            echo "$fixed_code" > "$testfile"
+            fixed_tests="$fixed_tests $testfile"
+          done
+          echo "::set-output name=fixed_tests::$fixed_tests"
 
       # - name: Run Fixed Jest Tests
         # if: steps.fix-failed-tests.outputs.fixed_tests != ''
