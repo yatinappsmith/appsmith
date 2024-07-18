@@ -21,6 +21,9 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
+      
+      - name: Install Jest
+        run: yarn add --dev jest
 
       - name: Install OpenAI package
         run: pip install openai
