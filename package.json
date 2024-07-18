@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "jest-test-gen": "^1.4.3"
+  }
+}
