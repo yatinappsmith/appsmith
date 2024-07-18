@@ -25,7 +25,9 @@ jobs:
       # Install OpenAI CLI (adjust as per installation instructions)
       - name: Install OpenAI CLI
         run: |
-          curl -sSL https://cli.openai.com/install | sh
+          wget https://openai-cli.s3-us-west-2.amazonaws.com/latest/install.sh
+          chmod +x install.sh
+          ./install.sh
 
       - name: Get changed files in the client folder
         id: changed-files-specific
