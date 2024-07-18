@@ -88,8 +88,10 @@ jobs:
             # Ensure fixed_code is not empty
             if [ -z "$fixed_code" ]; then
               echo "Codex did not provide any fixed code for $testfile"
-              exit 1
+              continue  # Skip updating the file if no fixed code is provided
             fi
+            
+            echo "Fixed Code for $testfile: $fixed_code"  # Debug output
 
             # Update the test file with fixed_code
             echo "$fixed_code" > "$testfile"
