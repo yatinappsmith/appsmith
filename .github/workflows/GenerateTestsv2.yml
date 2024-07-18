@@ -2,6 +2,17 @@ name: Generate Jest Testsv2
 on:
   # This line enables manual triggering of this workflow.
   workflow_dispatch:
+    inputs:
+      model:
+        description: "Model"
+        default: "gpt-4o"
+        required: false
+        type: choice
+        options:
+        - "gpt-4o"
+        - "gpt-4-turbo"
+        - "gpt-3.5-turbo"
+     
 
 defaults:
   run:
