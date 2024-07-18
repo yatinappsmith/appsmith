@@ -50,6 +50,9 @@ jobs:
             yarn run jest-test-gen $file
           done
 
+        # git ignore yarn.lock
+
+
     
     # Commit newly generated test files
       - name: Commit generated test files
@@ -58,6 +61,8 @@ jobs:
            git config --global user.email "yatin@appsmith.com"
            git config --global user.name "github-actions[bot]"
            git add .
+           git reset -- package.json
+           git reset -- yarn.lock
            git commit -m "chore: generate tests for changed files"
            git push
 
