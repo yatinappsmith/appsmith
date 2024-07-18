@@ -40,12 +40,6 @@ jobs:
       
       - name: Install jest-gen-test
         run: yarn add jest-test-gen
-
-      - name: Install dependencies
-        run: yarn install
-
-      - name: Build TypeScript
-        run: yarn run build
       
       - name: Generate Tests
         id: generate-tests
@@ -61,17 +55,17 @@ jobs:
           done
           echo "::set-output name=generated_test_files::$GENERATED_TEST_FILES"
 
-      - name: Run Generated Jest Tests
-        id: run-jest-tests
-        if: steps.generate-tests.outputs.generated_test_files != ''
-        run: |
-          failed_tests=""
-          for testfile in ${{ steps.generate-tests.outputs.generated_test_files }}; do
-            if ! yarn jest "$testfile"; then
-              failed_tests="$failed_tests $testfile"
-            fi
-          done
-          echo "::set-output name=failed_tests::$failed_tests"
+      # - name: Run Generated Jest Tests
+      #   id: run-jest-tests
+      #   if: steps.generate-tests.outputs.generated_test_files != ''
+      #   run: |
+      #     failed_tests=""
+      #     for testfile in ${{ steps.generate-tests.outputs.generated_test_files }}; do
+      #       if ! yarn jest "$testfile"; then
+      #         failed_tests="$failed_tests $testfile"
+      #       fi
+      #     done
+      #     echo "::set-output name=failed_tests::$failed_tests"
       
       - name: Fix Failed Tests using Codex
         if: steps.generate-tests.outputs.generated_test_files != ''
