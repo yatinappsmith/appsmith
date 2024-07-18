@@ -77,7 +77,7 @@ jobs:
             -H "Authorization: Bearer $OPENAI_API_KEY" \
             -H "Content-Type: application/json" \
             -d '{
-              "model": "davinci-codex",
+              "model": "gpt-4o",
               "prompt": "Generate missing tests or fix failing tests '"$testfile"':",
               "max_tokens": 150
             }' \
