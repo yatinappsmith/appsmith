@@ -51,4 +51,11 @@ jobs:
           done
 
     
-    
+    # Commit newly generated test files
+      - name: Commit generated test files
+        if: steps.changed-files-specific.outputs.any_changed == 'true'
+        run: |
+          git add .
+          git commit -m "chore: generate tests for changed files"
+          git push
+
