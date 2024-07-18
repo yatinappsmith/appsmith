@@ -78,7 +78,7 @@ jobs:
               -H "Content-Type: application/json" \
               -d '{
                 "model": "text-davinci-003",
-                "prompt": "Fix Jest test in '"$testfile"':",
+                "prompt": "Generate missing tests or fix failing tests in '"$testfile"':",
                 "max_tokens": 150
               }' \
               https://api.openai.com/v1/engines/davinci-codex/completions)
@@ -90,7 +90,7 @@ jobs:
               echo "Codex did not provide any fixed code for $testfile"
               continue  # Skip updating the file if no fixed code is provided
             fi
-            
+
             echo "Fixed Code for $testfile: $fixed_code"  # Debug output
 
             # Update the test file with fixed_code
