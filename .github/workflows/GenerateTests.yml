@@ -77,11 +77,12 @@ jobs:
               -H "Authorization: Bearer $OPENAI_API_KEY" \
               -H "Content-Type: application/json" \
               -d '{
-                "model": "text-davinci-003"
-                "prompt": "Generate missing tests or fix failing tests in '"$testfile"':",
+                "model": "text-davinci-003",
+                "prompt": "Generate missing tests or fix failing tests '"$testfile"':",
                 "max_tokens": 150
               }' \
-              https://api.openai.com/v1/engines/davinci-codex/completions)
+              https://api.openai.com/v1/engines/text-davinci-003/completions)
+
             
             echo "Response gotten from $response" #check response gotten from codex
             fixed_code=$(echo "$response" | jq -r '.choices[0].text')
