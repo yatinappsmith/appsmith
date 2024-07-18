@@ -55,7 +55,9 @@ jobs:
       - name: Commit generated test files
         if: steps.changed-files-specific.outputs.any_changed == 'true'
         run: |
-          git add .
-          git commit -m "chore: generate tests for changed files"
-          git push
+           git config --global user.email "yatin@appsmith.com"
+           git config --global user.name "github-actions[bot]"
+           git add .
+           git commit -m "chore: generate tests for changed files"
+           git push
 
