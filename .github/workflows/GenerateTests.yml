@@ -22,12 +22,8 @@ jobs:
         with:
           fetch-depth: 0
 
-      # Install OpenAI CLI (adjust as per installation instructions)
-      - name: Install OpenAI CLI
-        run: |
-          wget https://openai-cli.s3-us-west-2.amazonaws.com/latest/install.sh
-          chmod +x install.sh
-          ./install.sh
+      - name: Install OpenAI package
+        run: pip install openai
 
       - name: Get changed files in the client folder
         id: changed-files-specific
