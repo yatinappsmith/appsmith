@@ -37,8 +37,18 @@ jobs:
             echo "$file was changed"
           done
    
-
       - name: Install jest-gen-test
         run: yarn add jest-test-gen
+    
+      - name: Generate Tests
+        if: steps.changed-files-specific.outputs.any_changed == 'true'
+        env:
+          ALL_CHANGED_FILES: ${{ steps.changed-files-specific.outputs.all_changed_files }}
+        run: |
+          for file in ${ALL_CHANGED_FILES}; do
+            testfile=`echo $file|sed 's/.ts/.generated.test.ts/g'`
+            yarn run jest-test-gen $file
+          done
+
     
     
