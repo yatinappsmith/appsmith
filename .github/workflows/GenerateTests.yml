@@ -87,7 +87,7 @@ jobs:
             fixed_code=$(echo "$response" | jq -r '.choices[0].text')
 
             # Ensure fixed_code is not empty
-            if [ -z "$fixed_code" ]; then
+            if [ -z "$fixed_code" ] || [ "$fixed_code" == "null" ]; then
               echo "Codex did not provide any fixed code for $testfile"
               continue  # Skip updating the file if no fixed code is provided
             fi
