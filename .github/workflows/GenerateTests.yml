@@ -60,11 +60,8 @@ jobs:
             fi
           done
           echo "::set-output name=failed_tests::$failed_tests"
-
-      - name: Install jq
-        run: sudo apt-get install jq
       
-      - name: Fix Failed Tests using Codex
+      # - name: Fix Failed Tests using Codex
         if: steps.run-jest-tests.outputs.failed_tests != ''
         run: |
           fixed_tests=""
@@ -94,7 +91,7 @@ jobs:
           done
           echo "::set-output name=fixed_tests::$fixed_tests"
 
-      - name: Run Fixed Jest Tests
+      # - name: Run Fixed Jest Tests
         if: steps.fix-failed-tests.outputs.fixed_tests != ''
         run: |
           for testfile in ${{ steps.fix-failed-tests.outputs.fixed_tests }}; do
