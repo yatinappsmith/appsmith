@@ -73,16 +73,14 @@ jobs:
           fixed_tests=""
           for testfile in ${{ steps.generate-tests.outputs.generated_test_files }}; do
             # Construct Codex API request and handle response
-            response=$(curl -X POST \
-              -H "Authorization: Bearer $OPENAI_API_KEY" \
-              -H "Content-Type: application/json" \
-              -d '{
-                "model": "text-davinci-003",
-                "prompt": "Generate missing tests or fix failing tests '"$testfile"':",
-                "max_tokens": 150
-              }' \
-              https://api.openai.com/v1/engines/text-davinci-003/completions)
-
+           response=$(curl -X POST \
+            -H "Authorization: Bearer $OPENAI_API_KEY" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "prompt": "Generate missing tests or fix failing tests '"$testfile"':",
+              "max_tokens": 150
+            }' \
+            https://api.openai.com/v1/completions)
             
             echo "Response gotten from $response" #check response gotten from codex
             fixed_code=$(echo "$response" | jq -r '.choices[0].text')
