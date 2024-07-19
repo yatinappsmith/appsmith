@@ -78,7 +78,7 @@ jobs:
             -H "Content-Type: application/json" \
             -d '{
               "model": "babbage-002",
-              "prompt": "Generate fix for these Jest unit tests'"$testfile"':",
+              "prompt": "Improve the jest unit test cases in this file in typescript and return the newly modified version'"$testfile"':",
               "max_tokens": 150
             }' \
             https://api.openai.com/v1/completions)
