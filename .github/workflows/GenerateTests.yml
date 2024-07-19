@@ -78,7 +78,7 @@ jobs:
             -H "Content-Type: application/json" \
             -d '{
               "model": "babbage-002",
-              "prompt": "Generate missing tests or fix failing tests '"$testfile"':",
+              "prompt": "Generate fix for these Jest unit tests'"$testfile"':",
               "max_tokens": 150
             }' \
             https://api.openai.com/v1/completions)
