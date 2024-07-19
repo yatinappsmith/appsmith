@@ -7,6 +7,7 @@ import type { ControlType } from "constants/PropertyControlConstants";
 import type { WrappedFieldInputProps, WrappedFieldMetaProps } from "redux-form";
 import { Field } from "redux-form";
 
+
 class CheckboxControl extends BaseControl<CheckboxControlProps> {
   getControlType(): ControlType {
     return "CHECKBOX";
