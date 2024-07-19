@@ -77,7 +77,7 @@ jobs:
             -H "Authorization: Bearer $OPENAI_API_KEY" \
             -H "Content-Type: application/json" \
             -d '{
-              "model": "babbage-002",
+              "model": "gpt-4-turbo",
               "prompt": "Improve the jest unit test cases in this file in typescript and return the newly modified version'"$testfile"':",
               "max_tokens": 150
             }' \
