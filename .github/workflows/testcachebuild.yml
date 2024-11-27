@@ -37,13 +37,19 @@ jobs:
           git config --global user.name "$gituser"
           git clone https://$cachetoken@github.com/appsmithorg/cibuildcache.git
           git lfs install
-          # git lfs migrate import --everything --yes
+          git lfs migrate import --everything --yes
           echo `pwd`
+          cd cibuildcache/CE/release/server
+          git lfs migrate import --everything --yes
+          git lfs pull ./server.jar
+          mv ./server.jar ../../../../../server.jar
+          cd ../../../../../
+          tar -xzvf ./server.jar
           
 
-      - uses: actions/checkout@v2
-      - name: Setup upterm session
-        uses: lhotari/action-upterm@v1
+      #- uses: actions/checkout@v2
+      #- name: Setup upterm session
+      #  uses: lhotari/action-upterm@v1
           # cd cibuildcache/CE/release/server
           # git lfs pull ./server.jar
           # mv ./server.jar ../../../../../server.jar
