@@ -4,9 +4,7 @@ name: Test build Cache
 on:
   workflow_dispatch:
 
-# Change the working directory for all the jobs in this workflow
-defaults:
-  run:
+
 
 jobs:
   server-unit-tests:
