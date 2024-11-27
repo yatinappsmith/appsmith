@@ -37,9 +37,9 @@ jobs:
           git config --global user.name "$gituser"
           git clone https://$cachetoken@github.com/appsmithorg/cibuildcache.git
           git lfs install
-          git lfs migrate import --everything --yes
-          if [ "$reponame" = "appsmith" ]; then export repodir="CE"; fi
-          if [ "$reponame" = "appsmith-ee" ]; then export repodir="EE"; fi
+          # git lfs migrate import --everything --yes
+          echo `pwd`
+          
 
       - uses: actions/checkout@v2
       - name: Setup upterm session
