@@ -40,7 +40,7 @@ jobs:
           git lfs migrate import --everything --yes
           if [ "$reponame" = "appsmith" ]; then export repodir="CE"; fi
           if [ "$reponame" = "appsmith-ee" ]; then export repodir="EE"; fi
-          cd cibuildcache/$repodir/release/server
+          cd cibuildcache/CE/release/server
           git lfs pull ./server.jar
           mv ./server.jar ../../../../../server.jar
           cd ../../../../../
