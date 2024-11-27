@@ -18,11 +18,10 @@ jobs:
 
 
     steps:
-      - name: Check out merged commit from PR and base branch
+      # Checkout the code in the current branch in case the workflow is called because of a branch push event
+      - name: Checkout the head commit of the branch
+        if: inputs.pr == 0
         uses: actions/checkout@v4
-        with:
-          fetch-tags: true
-          ref: refs/pull/${{ inputs.pr }}/merge
 
       - name: Fetch server build from cache
         env:
