@@ -26,7 +26,6 @@ jobs:
           ref: refs/pull/${{ inputs.pr }}/merge
 
       - name: Fetch server build from cache
-        if: steps.changed-files-specific.outputs.any_changed == 'false' && success()  && github.event_name != 'push' && github.event_name != 'workflow_dispatch'  && github.event_name != 'schedule'
         env:
           cachetoken: ${{ secrets.CACHETOKEN }}
           reponame: ${{ secrets.repositoryname }}
