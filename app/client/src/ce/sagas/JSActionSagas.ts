@@ -109,6 +109,7 @@ export function* createJSCollectionSaga(
     const payload = actionPayload.payload.request;
     const response: JSCollectionCreateUpdateResponse =
       yield JSActionAPI.createJSCollection(payload);
+
     const isValidResponse: boolean = yield validateResponse(response);
     if (isValidResponse) {
       const actionName = payload.name ? payload.name : "";
