@@ -30,7 +30,6 @@ jobs:
           gituser: ${{ secrets.CACHE_GIT_USER }}
           gituseremail: ${{ secrets.CACHE_GIT_EMAIL }}
         run: |
-          #cd ~
           mkdir cacherepo
           cd ./cacherepo
           git lfs install
