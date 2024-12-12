@@ -1,0 +1,40 @@
+me: Manual Matrix Job Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  matrix-job:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        config:
+          - job_name: "Job1"
+            param: "value1"
+          - job_name: "Job2"
+            param: "value2"
+          - job_name: "Job3"
+            param: "value3"
+          - job_name: "Job4"
+            param: "value4"
+          - job_name: "Job5"
+            param: "value5"
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Print Job Details
+        run: |
+          echo "Running ${{ matrix.config.job_name }} with parameter ${{ matrix.config.param }}"
+
+      - name: Perform Task
+        run: |
+          echo "This is where you can perform tasks specific to ${{ matrix.config.job_name }}"
+          # Add your commands here, e.g., scripts or build processes
+
+      - name: Force Fail for Job2
+        if: ${{ matrix.config.job_name == 'Job2' }}
+        run: |
+          echo "Forcing failure for ${{ matrix.config.job_name }}"
+          exit 1
