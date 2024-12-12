@@ -17,6 +17,7 @@ import type { FieldEntityInformation } from "components/editorComponents/CodeEdi
 import { AutocompleteDataType } from "utils/autocomplete/AutocompleteDataType";
 import { eeAppsmithAutocompleteDefs } from "@appsmith/utils/autocomplete/helpers";
 
+
 export const entityDefinitions = {
   APPSMITH: (entity: AppsmithEntity, extraDefsToDefine: ExtraDef) => {
     const generatedTypeDef = generateTypeDef(
