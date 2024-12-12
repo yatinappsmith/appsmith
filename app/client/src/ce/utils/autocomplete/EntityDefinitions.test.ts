@@ -3,6 +3,7 @@ import type { JSCollectionData } from "@appsmith/reducers/entityReducers/jsActio
 import { getPropsForJSActionEntity } from "@appsmith/pages/Editor/Explorer/Entity/getEntityProperties";
 import type { JSActionEntity } from "@appsmith/entities/DataTree/types";
 
+
 const jsObject: JSCollectionData = {
   isLoading: false,
   config: {
