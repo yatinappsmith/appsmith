@@ -1,4 +1,4 @@
-me: Manual Matrix Job Workflow
+name: Manual Matrix Job Workflow
 
 on:
   workflow_dispatch:
